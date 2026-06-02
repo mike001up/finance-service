@@ -1,5 +1,6 @@
 package com.ehome.mal.financeservice.controller;
 
+import com.pig4cloud.pig.common.core.constant.SecurityConstants;
 import com.pig4cloud.pig.common.core.util.R;
 import com.ehome.mal.financeservice.entity.BizAccountBalance;
 import com.ehome.mal.financeservice.service.BizAccountBalanceService;
@@ -20,14 +21,14 @@ public class BizAccountBalanceController {
 
     @ApiOperation("查询科目余额")
     @GetMapping("/list")
-    public R<List<BizAccountBalance>> getBalancesByPeriod(@RequestParam String tenantId,
+    public R<List<BizAccountBalance>> getBalancesByPeriod(@RequestHeader(SecurityConstants.TENANT_ID) String tenantId,
                                                            @RequestParam String periodCode) {
         return R.ok(accountBalanceService.getBalancesByPeriod(tenantId, periodCode));
     }
 
     @ApiOperation("试算平衡")
     @GetMapping("/trialBalance")
-    public R<Boolean> calculateTrialBalance(@RequestParam String tenantId,
+    public R<Boolean> calculateTrialBalance(@RequestHeader(SecurityConstants.TENANT_ID) String tenantId,
                                              @RequestParam String periodCode) {
         return R.ok(accountBalanceService.calculateTrialBalance(tenantId, periodCode));
     }

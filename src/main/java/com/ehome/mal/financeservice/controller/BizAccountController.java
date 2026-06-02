@@ -1,5 +1,6 @@
 package com.ehome.mal.financeservice.controller;
 
+import com.pig4cloud.pig.common.core.constant.SecurityConstants;
 import com.pig4cloud.pig.common.core.util.R;
 import com.ehome.mal.financeservice.entity.BizAccount;
 import com.ehome.mal.financeservice.service.BizAccountService;
@@ -20,7 +21,7 @@ public class BizAccountController {
 
     @ApiOperation("获取科目树")
     @GetMapping("/tree")
-    public R<List<BizAccount>> getAccountTree(@RequestParam String tenantId) {
+    public R<List<BizAccount>> getAccountTree(@RequestHeader(SecurityConstants.TENANT_ID) String tenantId) {
         return R.ok(accountService.getAccountTree(tenantId));
     }
 

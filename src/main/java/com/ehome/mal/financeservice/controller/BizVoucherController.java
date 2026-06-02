@@ -1,5 +1,6 @@
 package com.ehome.mal.financeservice.controller;
 
+import com.pig4cloud.pig.common.core.constant.SecurityConstants;
 import com.pig4cloud.pig.common.core.util.R;
 import com.ehome.mal.financeservice.dto.VoucherDTO;
 import com.ehome.mal.financeservice.entity.BizVoucher;
@@ -40,7 +41,7 @@ public class BizVoucherController {
 
     @ApiOperation("生成凭证号")
     @GetMapping("/generateNo")
-    public R<String> generateVoucherNo(@RequestParam String tenantId,
+    public R<String> generateVoucherNo(@RequestHeader(SecurityConstants.TENANT_ID) String tenantId,
                                         @RequestParam String periodCode,
                                         @RequestParam String voucherType) {
         return R.ok(voucherService.generateVoucherNo(tenantId, periodCode, voucherType));
@@ -54,7 +55,7 @@ public class BizVoucherController {
 
     @ApiOperation("查询凭证列表")
     @GetMapping("/list")
-    public R<List<BizVoucher>> listVouchers(@RequestParam String tenantId,
+    public R<List<BizVoucher>> listVouchers(@RequestHeader(SecurityConstants.TENANT_ID) String tenantId,
                                              @RequestParam(required = false) String periodCode) {
         LambdaQueryWrapper<BizVoucher> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(BizVoucher::getTenantId, tenantId);

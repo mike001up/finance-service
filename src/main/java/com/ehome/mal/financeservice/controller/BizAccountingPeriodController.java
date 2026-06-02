@@ -1,5 +1,6 @@
 package com.ehome.mal.financeservice.controller;
 
+import com.pig4cloud.pig.common.core.constant.SecurityConstants;
 import com.pig4cloud.pig.common.core.util.R;
 import com.ehome.mal.financeservice.entity.BizAccountingPeriod;
 import com.ehome.mal.financeservice.service.BizAccountingPeriodService;
@@ -20,7 +21,7 @@ public class BizAccountingPeriodController {
 
     @ApiOperation("查询会计期间列表")
     @GetMapping("/list")
-    public R<List<BizAccountingPeriod>> getPeriodsByTenant(@RequestParam String tenantId) {
+    public R<List<BizAccountingPeriod>> getPeriodsByTenant(@RequestHeader(SecurityConstants.TENANT_ID) String tenantId) {
         return R.ok(accountingPeriodService.getPeriodsByTenant(tenantId));
     }
 
@@ -38,7 +39,7 @@ public class BizAccountingPeriodController {
 
     @ApiOperation("获取当前会计期间")
     @GetMapping("/current")
-    public R<BizAccountingPeriod> getCurrentPeriod(@RequestParam String tenantId) {
+    public R<BizAccountingPeriod> getCurrentPeriod(@RequestHeader(SecurityConstants.TENANT_ID) String tenantId) {
         return R.ok(accountingPeriodService.getCurrentPeriod(tenantId));
     }
 }

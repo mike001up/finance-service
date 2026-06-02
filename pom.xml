@@ -70,6 +70,11 @@
 			<artifactId>mybatis-plus-spring-boot3-starter</artifactId>
 			<version>3.5.5</version>
 		</dependency>
+		<!-- 多租户动态数据源 -->
+		<dependency>
+			<groupId>com.pig4cloud</groupId>
+			<artifactId>pig-common-datasource</artifactId>
+		</dependency>
 		<!--MySQL驱动-->
 		<dependency>
 			<groupId>com.mysql</groupId>

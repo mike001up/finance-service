@@ -1,5 +1,6 @@
 package com.ehome.mal.financeservice.controller;
 
+import com.pig4cloud.pig.common.core.constant.SecurityConstants;
 import com.pig4cloud.pig.common.core.util.R;
 import com.ehome.mal.financeservice.entity.BizFixedAsset;
 import com.ehome.mal.financeservice.service.BizFixedAssetService;
@@ -46,7 +47,7 @@ public class BizFixedAssetController {
 
     @ApiOperation("查询固定资产列表")
     @GetMapping("/list")
-    public R<List<BizFixedAsset>> listAssets(@RequestParam String tenantId) {
+    public R<List<BizFixedAsset>> listAssets(@RequestHeader(SecurityConstants.TENANT_ID) String tenantId) {
         LambdaQueryWrapper<BizFixedAsset> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(BizFixedAsset::getTenantId, tenantId)
                 .orderByDesc(BizFixedAsset::getCreateTime);
